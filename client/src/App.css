@@ -1,0 +1,50 @@
+.app {
+    padding: 20px;
+}
+
+.title {
+    margin: 0;
+}
+
+.app-form {
+    max-width: fit-content;
+}
+
+.input-block {
+    margin-bottom: 10px;
+}
+
+.input-block label {
+    display: inline-block;
+    width: 128px;
+    font-size: 2rem;
+}
+
+.input-block input, .input-block select {
+    width: 300px;
+    padding: 2px;
+    font-size: 22px;
+    height: 24px;
+    position: relative;
+    bottom: 5px;
+    background: #21cc36;
+    color: #000;
+    border: 0;
+    text-transform: uppercase;
+    font-family: inherit !important;
+    outline: 0 !important;
+}
+
+.submit-container {
+    text-align: right;;
+}
+
+.submit {
+    background: transparent;
+    outline: 0;
+    border: 1px #20cc36 solid;
+    font-size: 30px;
+    color: #20cc36;
+    width: 100px;
+    font-family: inherit !important;
+}
