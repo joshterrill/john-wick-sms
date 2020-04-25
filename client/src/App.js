@@ -2,10 +2,24 @@ import React, { Component } from "react";
 import "./App.css";
 
 export default class App extends Component {
+    state = {
+        recipients: [],
+        contractStatuses: [],
+    };
+    componentDidMount = async () => {
+        const recipientsPromise = fetch("http://localhost:3030/recipients").then(res => res.json());
+        const contractStatusesPromise = fetch("http://localhost:3030/contract-statuses").then(res => res.json());
+        const [ recipients, contractStatuses ] = await Promise.all([recipientsPromise, contractStatusesPromise]);
+        this.setState({
+            recipients,
+            contractStatuses,
+        });
+    }
     submitForm = e => {
         e.preventDefault();
     }
     render() {
+        const { recipients, contractStatuses } = this.state;
         return (
             <div className="app">
                 <header className="app-header">
@@ -15,13 +29,18 @@ export default class App extends Component {
                 <form className="app-form" onSubmit={this.submitForm}>
                     <div className="input-block">
                         <label>TO</label>
-                        <input type="text" />
+                        <select>
+                            {recipients.map(recipient =>
+                                <option key={recipient.id} value={recipient.number}>{recipient.name}</option>
+                            )}
+                        </select>
                     </div>
                     <div className="input-block">
                         <label>STATUS</label>
                         <select>
-                            <option>OPEN CONTRACT</option>
-                            <option>CLOSED CONTRACT</option>
+                            {contractStatuses.map(contractStatus =>
+                                <option key={contractStatus} value={contractStatus}>{contractStatus}</option>
+                            )}
                         </select>
                     </div>
                     <div className="input-block">
